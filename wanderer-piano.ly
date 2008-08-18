@@ -5,7 +5,7 @@
 %                                  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\version "2.8.0"
+\version "2.10.10"
 
 #(set-default-paper-size "letter")
 #(ly:set-option 'point-and-click #f)
@@ -58,7 +58,7 @@ PianoR = \relative c' {
 	d4. a4 fis'8 | fis8. e16 d8 a'4. |   % 63
 	b8 cis d d8. cis16 b8 | cis4 a8 fis4.) |   % 65
 	g( a4) e8( | fis4. g4) d8( |   % 67
-	e fis g g8. fis16 d8 | d4. cis4) a8 |   % 69
+	e fis g g8. fis16 d8 | e4. ~ e4) a,8 |   % 69
 	a-. d-. fis-. a4 fis8( | g8. fis16 e8 c4) e8( |   % 71
 	g8. fis16 e8 c4) e8( | c)-. d4 ~ d a8 |   % 73
 	a-. d-. fis-. a4 fis8( | g8. fis16 e8 c4) e8( |   % 75
@@ -77,7 +77,7 @@ PianoR = \relative c' {
 	e fis e e8. d16 cis8 | %100
 	d2 ~ d8) a( |   % 101
 	a'8. b16 a8 a g a | b4. b,4) a'8( |   % 103
-	g8. a16 g8 g fis g | a4. a,4) d8( |   % 105
+	g8. a16 g8 g fis g | a4.) a,4( d8 |   % 105
 	fis8. g16 fis8 fis e fis | g4 b,8 g' fis d |   % 107
 	e fis e e8. d16 cis8 |
 		\once \override Script #'padding = #'2.0
@@ -120,7 +120,7 @@ PianoL = \relative c {
 	d,\SU\SD a' d d, a' d | d, a' d d, a' d |   % 55
 	g,,\SU\SD d' g g, d' g | d\SU\SD a' d d, a' d |   % 57
 	a,\SU\SD e' a a, e' a | d,\SU\SD a' d b,\SU\SD fis' b |   % 59
-	g,\SU\SD d' g g, d' g | a,\SU\SD e' a a, e' a |   % 61
+	e,\SU\SD b' g' e, b' g' | a,,\SU\SD e' a a, e' a |   % 61
 	d,\SU\SD a' d d, a' d | d, a' d d, a' d |   % 63
 	g,,\SU\SD d' g g, d' g | fis,\SU\SD cis' fis fis, cis' fis |   % 65
 	g,\SU\SD d' g a,\SU\SD e' a | b,\SU\SD fis' b g,\SU\SD d' g |   % 67
