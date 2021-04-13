@@ -5,7 +5,7 @@
 %                                  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\version "2.10.10"
+\version "2.20.0"
 
 #(set-default-paper-size "letter")
 #(ly:set-option 'point-and-click #f)
@@ -14,14 +14,14 @@
 	print-page-number = ##t
 }
 
-SU = \sustainUp
-SD = \sustainDown
+SU = \sustainOff
+SD = \sustainOn
 
 PianoR = \relative c' {
 	\clef G
 	\key d \major
 	\time 6/8
-	\override Score.MetronomeMark #'padding = #2.5
+	\override Score.MetronomeMark.padding = #2.5
 	\tempo 4. = 88
 	
 	\slurUp
@@ -80,7 +80,7 @@ PianoR = \relative c' {
 	g8. a16 g8 g fis g | a4.) a,4( d8 |   % 105
 	fis8. g16 fis8 fis e fis | g4 b,8 g' fis d |   % 107
 	e fis e e8. d16 cis8 |
-		\once \override Script #'padding = #'2.0
+		\once \override Script.padding = #'2.0  % bump fermata up to avoid slur
 		d2.\fermata) 
 	\bar "|."
 }
@@ -145,7 +145,7 @@ PianoL = \relative c {
 	a,\SU\SD e' a a, e' a | d,\SU\SD a' d cis,\SU\SD a' cis |   % 105
 	b,\SU\SD fis' b b, fis' b | g,\SU\SD d' g g, d' g |   % 107
 	a,\SU\SD e' a a,\SU\SD e' a | d,\SU\SD a' d
-		\once \override Script #'padding = #'1.0
+		\once \override Script.padding = #'1.0  % bump fermata up to separate arch from duration dot
 		fis4.\fermata
 	\bar "|."
 }
@@ -196,7 +196,8 @@ dynamics = {
 	% Coda
 	% set up a ritardando
 		\textSpannerDown
-		\override TextSpanner #'edge-text = #'("rit. " . "")
+		\once \override TextSpanner.bound-details.left.text = #"rit. "
+		\once \override TextSpanner.bound-details.left-broken.text = ##f  % suppress reprinting "rit." after line wrap
 	s2.\startTextSpan s s s
 	s s s s\stopTextSpan
 }
@@ -212,11 +213,12 @@ dynamics = {
 	}
 	\paper {
 		ragged-last-bottom = ##f
+		system-system-spacing.padding = #3  % increase padding by 2 staff spaces to make whitespace below pedal bracket resemble whitespace below bottom of unbracketed staff. Expect this to result in about 4 pages in lilypond 2.20.
 	}
 	\score {
 		\simultaneous {
-			\set Score.skipBars = ##t
-			\set Score.melismaBusyProperties = #'()
+			\set Score.skipBars = ##t  % automatically number multi-measure rests
+			\set Score.melismaBusyProperties = #'()  % some hack I no longer remember about lyrics under ties and slurs
 			\context PianoStaff
 			<< 
 				\context Staff="Piano (R)" \transpose d cis \PianoR
@@ -225,42 +227,9 @@ dynamics = {
 			>>
 		}
 		
-		% Below was copied and pasted from lilypond docs, for centered dynamics
 		\layout {
 			\context {
-				\type "Engraver_group"
-				\name Dynamics
-				\alias Voice % So that \cresc works, for example.
-				\consists "Output_property_engraver"
-				
-				\override VerticalAxisGroup #'minimum-Y-extent = #'(-1 . 1)
-				pedalSustainStrings = #'("Ped." "*Ped." "*")
-				pedalUnaCordaStrings = #'("una corda" "" "tre corde")
-				
-				\consists "Piano_pedal_engraver"
-				\consists "Script_engraver"
-				\consists "Dynamic_engraver"
-				\consists "Text_engraver"
-				\consists "Text_spanner_engraver"
-				
-				%\override TextScript #'font-size = #2
-				\override TextScript #'font-shape = #'italic
-				\override TextScript #'extra-offset = #'(0 . 2.5)
-				\override TextSpanner #'extra-offset = #'(0 . 1.5)
-				\override DynamicText #'extra-offset = #'(0.5 . 2.5)
-				\override DynamicTextSpanner #'extra-offset = #'(0 . 2.5)
-				\override Hairpin #'extra-offset = #'(0 . 2.5)
-				\override Hairpint #'bound-padding = #'2.0
-				\override DynamicText #'padding = #1.0
-				
-				\consists "Skip_event_swallow_translator"
-				
-				\consists "Axis_group_engraver"
-			}
-			\context {
 				\PianoStaff
-				\accepts Dynamics
-				\override VerticalAlignment #'forced-distance = #7
 			}
 		}
 	}
@@ -290,42 +259,9 @@ dynamics = {
 			>>
 		}
 		
-		% Below was copied and pasted from lilypond docs, for centered dynamics
 		\layout {
 			\context {
-				\type "Engraver_group"
-				\name Dynamics
-				\alias Voice % So that \cresc works, for example.
-				\consists "Output_property_engraver"
-				
-				\override VerticalAxisGroup #'minimum-Y-extent = #'(-1 . 1)
-				pedalSustainStrings = #'("Ped." "*Ped." "*")
-				pedalUnaCordaStrings = #'("una corda" "" "tre corde")
-				
-				\consists "Piano_pedal_engraver"
-				\consists "Script_engraver"
-				\consists "Dynamic_engraver"
-				\consists "Text_engraver"
-				\consists "Text_spanner_engraver"
-				
-				%\override TextScript #'font-size = #2
-				\override TextScript #'font-shape = #'italic
-				\override TextScript #'extra-offset = #'(0 . 2.5)
-				\override TextSpanner #'extra-offset = #'(0 . 1.5)
-				\override DynamicText #'extra-offset = #'(0.5 . 2.5)
-				\override DynamicTextSpanner #'extra-offset = #'(0 . 2.5)
-				\override Hairpin #'extra-offset = #'(0 . 2.5)
-				\override Hairpint #'bound-padding = #'2.0
-				\override DynamicText #'padding = #1.0
-				
-				\consists "Skip_event_swallow_translator"
-				
-				\consists "Axis_group_engraver"
-			}
-			\context {
 				\PianoStaff
-				\accepts Dynamics
-				\override VerticalAlignment #'forced-distance = #7
 			}
 		}
 	}
