@@ -27,22 +27,30 @@ PianoR = \relative c' {
 	\slurUp
 	R2.*3 |   % 3
 	r4 r8 r4 a'8 |   % 5
+
+	% Opening theme
 	a-. d-. fis-. a4 fis8( | g8. fis16 e8 c4) e8( |   % 7
 	g8. fis16 e8 c4) e8( | c)-. d4 ~ d a8 |   % 9
 	a-. d-. fis-. a4 fis8( | g8. fis16 e8 c4) e8( |   % 11
-	g8. fis16 e8 a8. g16 e8 | fis2 ~ fis8) dis16-. dis-. |   % 13
+	g8. fis16 e8 a8 g e | fis4. ~ fis4) dis16-. dis-. |   % 13
 	dis8-. e-. fis-. g4( e8 | cis4 e8 fis4 d8 |   % 15
 	b4 d8 e4 cis8 | ais4 cis8 d4) b8( |   % 17
 	b8. cis16 d8 d4) b8( | b8. cis16 d8 d4) b8( |   % 19
-	b8. cis16 d8 fis e d | e8) < cis, cis' >( < d d' > < e e' > < fis fis' > < g g' > |   % 21
-	< a a' >8. fis'16 < a, a' >8 < a a' >8. fis'16 < a, a' >8 | < b b' >8. < a a' >16 < g g' >8 < a a' >4) < a a' >8( |   % 23
-	< b b' >8. < a a' >16 < g g' >8 < a a' > < fis fis' > < d d' > | < g g' >8. < fis fis' >16 < d d' >8 < e e'>4.) |   % 25
-	< a a' >8.( fis'16 < a, a' >8 < a a' >8. fis'16 < a, a' >8 | < d d' >8. < cis cis' >16 < b b' >8 < a a' >4) < a a' >8( |   % 27
-	< d d' >8. < cis cis' >16 < b b' >8 < a a' > < fis fis' > < d d' > | < a' a' >4. a4) a8( |   % 29
+	b8. cis16 d8 fis e d | e8) cis( d e fis g |   % 21
+
+	% Chorus
+	a8.)( fis16 a8 a8. fis16 a8 | b8. a16 g8 a4) a8( |   % 23
+	b8. a16 g8 a fis d | g8. fis16 d8 e4.) |   % 25
+	a8.( fis16 a8 a8 fis a | d8. cis16 b8 a4) a8( |   % 27
+	d8. cis16 b8 a fis d | a'4. ~ a4) a,8( |   % 29
+
+	% 2nd theme
 	a d fis fis8. e16 d8 | b8. cis16 d8 b8. cis16 d8 |   % 31
 	g, cis e e8. d16 cis8 | d8. cis16 b8 a4) a8( |   % 33
 	a d fis fis8. e16 fis8 | g8. fis16 d8 g8. fis16 d8 |   % 35
 	e fis e e8. d16 cis8 | d4.) cis4-- fis,8( |   % 37
+
+	% Development 1
 	b cis d d8. cis16 b8 | b cis d d8. cis16 b8 |   % 39
 	cis d cis cis8. b16 a8 | fis4. a4) fis8( |   % 41
 	b cis d d8. cis16 b8 | b cis d d8. e16 fis8 |   % 43
@@ -51,6 +59,8 @@ PianoR = \relative c' {
 	fis g a a8. g16 fis8 | a8. g16 fis8 e4) b8( |   % 49
 	e fis g g8. fis16 e8 | d4 fis8 b,4) cis8( |   % 51
 	d e fis fis8. e16 d8 | cis4 e8 a,4) a8( |   % 53
+
+	% Development 2
 	d4. a4 fis'8 | fis8. e16 d8 a'4. |   % 55
 	g8 a b b8. a16 g8 | a4 fis8 d4.) |   % 57
 	e( a,4 e'8 | fis4. d4 b8 |   % 59
@@ -59,23 +69,31 @@ PianoR = \relative c' {
 	b8 cis d d8. cis16 b8 | cis4 a8 fis4.) |   % 65
 	g( a4) e8( | fis4. g4) d8( |   % 67
 	e fis g g8. fis16 d8 | e4. ~ e4) a,8 |   % 69
+
+	% Recapitulation
 	a-. d-. fis-. a4 fis8( | g8. fis16 e8 c4) e8( |   % 71
 	g8. fis16 e8 c4) e8( | c)-. d4 ~ d a8 |   % 73
 	a-. d-. fis-. a4 fis8( | g8. fis16 e8 c4) e8( |   % 75
-	g8. fis16 e8 a8. g16 e8 | fis2 ~ fis8) dis16-. dis-. |   % 77
+	g8. fis16 e8 a8 g e | fis4. ~ fis4) dis16-. dis-. |   % 77
 	dis8-. e-. fis-. g4( e8 | cis4 e8 fis4 d8 |   % 79
 	b4 d8 e4 cis8 | ais4 cis8 d4) b8( |   % 81
 	b8. cis16 d8 d4) b8( | b8. cis16 d8 d4) b8( |   % 83
-	b8. cis16 d8 fis e d | e8) < cis, cis' >( < d d' > < e e' > < fis fis' > < g g' > |   % 85
-	< a a' >8. fis'16 < a, a' >8 < a a' >8. fis'16 < a, a' >8 | < b b' >8. < a a' >16 < g g' >8 < a a' >4) < a a' >8( |   % 87
-	< b b' >8. < a a' >16 < g g' >8 < a a' > < fis fis' > < d d' > | < g g' >8. < fis fis' >16 < d d' >8 < e e'>4.) |   % 89
-	< a a' >8.( fis'16 < a, a' >8 < a a' >8. fis'16 < a, a' >8 | < d d' >8. < cis cis' >16 < b b' >8 < a a' >4) < a a' >8( |   % 91
-	< d d' >8. < cis cis' >16 < b b' >8 < a a' > < fis fis' > < d d' > | < a' a' >4. a4) a8( |   % 93
+	b8. cis16 d8 fis e d | e8) cis( d e fis g |   % 85
+
+	% Chorus
+	a8. fis16 a8 a8. fis16 a8 | b8. a16 g8 a4) a8( |   % 87
+	b8. a16 g8 a fis d | g8. fis16 d8 e4.) |   % 89
+	a8.( fis16 a8 a8 fis a | d8. cis16 b8 a4) a8( |   % 91
+	d8. cis16 b8 a fis d | a'4. ~ a4) a,8( |   % 93
+
+	% 2nd theme
 	a d fis fis8. e16 d8 | b8. cis16 d8 b8. cis16 d8 |   % 95
 	g, cis e e8. d16 cis8 | d8. cis16 b8 a4) a8( |   % 97
 	a d fis fis8. e16 fis8 | g8. fis16 d8 g8. fis16 d8 |   % 99
 	e fis e e8. d16 cis8 | %100
 	d2 ~ d8) a( |   % 101
+
+	% Coda
 	a'8. b16 a8 a g a | b4. b,4) a'8( |   % 103
 	g8. a16 g8 g fis g | a4.) a,4( d8 |   % 105
 	fis8. g16 fis8 fis e fis | g4 b,8 g' fis d |   % 107
@@ -93,22 +111,30 @@ PianoL = \relative c {
 	
 	d8\SD a' d e d a | d, a' d e d a |   % 3
 	d, a' d e d a | d, a' d e d a |   % 5
+
+	% Opening theme
 	d,\SU\SD a' d e d a | c,\SU\SD g' c d c g |   % 7
 	c,\SU\SD g' c d c g | d\SU\SD a' d e d a |   % 9
 	d,\SU\SD a' d e d a | c,\SU\SD g' c d c g |   % 11
 	c,\SU\SD g' c d c g | b,\SU\SD fis' b cis b fis |   % 13
-	b,\SU\SD fis' b e,\SU\SD b' e | a,,\SU\SD e' a d,\SU\SD a' d |   % 15
-	g,,\SU\SD d' g fis\SU\SD cis' fis | fis,,\SU\SD cis' fis b,\SU\SD fis' b |   % 17
+	b,\SU\SD fis' b e,\SU\SD g b | a,\SU\SD e' a d,\SU\SD fis a |   % 15
+	g,\SU\SD d' g cis,\SU\SD e g | fis,\SU\SD cis' fis b,\SU\SD d fis |   % 17
 	g,\SU\SD d' g g,\SU\SD d' g | g,\SU\SD d' g g,\SU\SD d' g |   % 19
-	g,\SU\SD d' g g,\SU\SD d' g | a,2.\SU\SD |   % 21
-	d8\SU\SD a' cis d cis a | g,\SU\SD d' g d\SU\SD a' d |   % 23
-	g,,\SU\SD d' g d\SU\SD a' b | g,\SU\SD d' g a,\SU\SD e' a |   % 25
-	d,8\SU\SD a' cis d cis a | g,\SU\SD d' g d\SU\SD a' d |   % 27
-	g,,\SU\SD d' g d\SU\SD a' b | a,\SU\SD e' a a,\SU\SD e' a |   % 29
+	g,\SU\SD d' g e,\SU\SD b' e | a,\SU\SD a' b cis d e |   % 21
+
+	% Chorus
+	d,8\SU\SD a' cis d cis a | g\SU\SD b d fis,\SU\SD a d |   % 23
+	g,\SU\SD b d fis,\SU\SD a b | e,\SU\SD g d' a,\SU\SD g' cis |   % 25
+	d,8\SU\SD a' cis d cis a | g\SU\SD b d fis,\SU\SD a d |   % 27
+	g,\SU\SD b d fis,\SU\SD a b | e,\SU\SD g d' a,\SU\SD g' cis |   % 29
+
+	% 2nd theme
 	d,\SU\SD a' d d, a' d | g,,\SU\SD d' g g,\SU\SD d' g |   % 31
 	a,\SU\SD e' a a, e' a | d,\SU\SD a' d d,\SU\SD a' d |   % 33
 	d,\SU\SD a' d d, a' d | g,,\SU\SD d' g g, d' g |   % 35
 	a,\SU\SD e' a a, e' a | d,\SU\SD a' d fis,,\SU\SD cis' fis |   % 37
+
+	% Development 1
 	b,\SU\SD fis' b b, fis' b | g,\SU\SD d' g g, d' g |   % 39
 	a,\SU\SD e' a a, e' a | d,\SU\SD a' d d, a' d |   % 41
 	b,\SU\SD fis' b b, fis' b | g,\SU\SD d' g g, d' g |   % 43
@@ -117,14 +143,18 @@ PianoL = \relative c {
 	d,\SU\SD a' d d, a' d | g,,\SU\SD d' g e\SU\SD b' e |   % 49
 	fis,,\SU\SD cis' fis fis, cis' fis | b,\SU\SD fis' b b, fis' b |   % 51
 	g,\SU\SD d' g g, d' g | a,\SU\SD e' a a, e' a |   % 53
+
+	% Development 2
 	d,\SU\SD a' d d, a' d | d, a' d d, a' d |   % 55
 	g,,\SU\SD d' g g, d' g | d\SU\SD a' d d, a' d |   % 57
 	a,\SU\SD e' a a, e' a | d,\SU\SD a' d b,\SU\SD fis' b |   % 59
-	e,\SU\SD b' g' e, b' g' | a,,\SU\SD e' a a, e' a |   % 61
+	g,\SU\SD d' g g, d' g | a,\SU\SD e' a a, e' a |   % 61
 	d,\SU\SD a' d d, a' d | d, a' d d, a' d |   % 63
 	g,,\SU\SD d' g g, d' g | fis,\SU\SD cis' fis fis, cis' fis |   % 65
-	g,\SU\SD d' g a,\SU\SD e' a | b,\SU\SD fis' b g,\SU\SD d' g |   % 67
+	g,\SU\SD d' g a,\SU\SD e' a | b,\SU\SD fis' d' g,,\SU\SD d' g |   % 67
 	a,\SU\SD e' d' a, e' d' | a,\SU\SD e' cis' a,\SU\SD e' cis' |   % 69
+
+	% Recapitulation
 	d,\SU\SD a' d e d a | c,\SU\SD g' c d c g |   % 71
 	c,\SU\SD g' c d c g | d\SU\SD a' d e d a |   % 73
 	d,\SU\SD a' d e d a | c,\SU\SD g' c d c g |   % 75
@@ -132,15 +162,21 @@ PianoL = \relative c {
 	b,\SU\SD fis' b e,\SU\SD b' e | a,,\SU\SD e' a d,\SU\SD a' d |   % 79
 	g,,\SU\SD d' g fis\SU\SD cis' fis | fis,,\SU\SD cis' fis b,\SU\SD fis' b |   % 81
 	g,\SU\SD d' g g,\SU\SD d' g | g,\SU\SD d' g g,\SU\SD d' g |   % 83
-	g,\SU\SD d' g g,\SU\SD d' g | a,2.\SU\SD |   % 85
-	d8\SU\SD a' cis d cis a | g,\SU\SD d' g d\SU\SD a' d |   % 87
-	g,,\SU\SD d' g d\SU\SD a' b | g,\SU\SD d' g a,\SU\SD e' a |   % 89
-	d,8\SU\SD a' cis d cis a | g,\SU\SD d' g d\SU\SD a' d |   % 91
-	g,,\SU\SD d' g d\SU\SD a' b | a,\SU\SD e' a a,\SU\SD e' a |   % 93
+	g,\SU\SD d' g e,\SU\SD b' e | a,\SU\SD a' b cis d e |   % 85
+
+	% Chorus
+	d,8\SU\SD a' cis d cis a | g\SU\SD b d fis,\SU\SD a d |   % 87
+	g,\SU\SD b d fis,\SU\SD a b | e,\SU\SD g d' a,\SU\SD g' cis |   % 89
+	d,8\SU\SD a' cis d cis a | g\SU\SD b d fis,\SU\SD a d |   % 91
+	g,\SU\SD b d fis,\SU\SD a b | e,\SU\SD g d' a,\SU\SD g' cis |   % 93
+
+	% 2nd theme
 	d,\SU\SD a' d d, a' d | g,,\SU\SD d' g g,\SU\SD d' g |   % 95
 	a,\SU\SD e' a a, e' a | d,\SU\SD a' d d,\SU\SD a' d |   % 97
 	d,\SU\SD a' d d, a' d | g,,\SU\SD d' g g, d' g |   % 99
 	a,\SU\SD e' a a, e' a | d,\SU\SD a' d d, a' d |   % 101
+
+	% Coda
 	d,\SU\SD a' d d, a' d | g,,\SU\SD d' g g, d' g |   % 103
 	a,\SU\SD e' a a, e' a | d,\SU\SD a' d cis,\SU\SD a' cis |   % 105
 	b,\SU\SD fis' b b, fis' b | g,\SU\SD d' g g, d' g |   % 107
