@@ -29,6 +29,7 @@ PianoR = \relative c' {
 	r4 r8 r4 a'8 |   % 5
 
 	% Opening theme
+	\mark \markup { \musicglyph #"scripts.segno" }
 	a-. d-. fis-. a4 fis8( | g8. fis16 e8 c4) e8( |   % 7
 	g8. fis16 e8 c4) e8( | c)-. d4 ~ d a8 |   % 9
 	a-. d-. fis-. a4 fis8( | g8. fis16 e8 c4) e8( |   % 11
@@ -48,7 +49,9 @@ PianoR = \relative c' {
 	a d fis fis8. e16 d8 | b8. cis16 d8 b8. cis16 d8 |   % 31
 	g, cis e e8. d16 cis8 | d8. cis16 b8 a4) a8( |   % 33
 	a d fis fis8. e16 fis8 | g8. fis16 d8 g8. fis16 d8 |   % 35
-	e fis e e8. d16 cis8 | d4.) cis4-- fis,8( |   % 37
+	e fis e e8. d16 cis8 |   % 36
+	\mark \markup { \musicglyph #"scripts.coda" }
+	d4.) cis4-- fis,8( |   % 37
 
 	% Development 1
 	b cis d d8. cis16 b8 | b cis d d8. cis16 b8 |   % 39
@@ -69,28 +72,30 @@ PianoR = \relative c' {
 	b8 cis d d8. cis16 b8 | cis4 a8 fis4.) |   % 65
 	g( a4) e8( | fis4. g4) d8( |   % 67
 	e fis g g8. fis16 d8 | e4. ~ e4) a,8 |   % 69
+	% right-align the D.S. al Coda mark
+	\once \override Score.RehearsalMark.break-visibility = #end-of-line-visible
+	\once \override Score.RehearsalMark.self-alignment-X = #RIGHT
+	\mark \markup {
+	  \general-align #Y #CENTER { D.S. al }
+	  \general-align #Y #CENTER \musicglyph #"scripts.coda"
+	}
+	\bar "||"
+}
 
-	% Recapitulation
-	a-. d-. fis-. a4 fis8( | g8. fis16 e8 c4) e8( |   % 71
-	g8. fis16 e8 c4) e8( | c)-. d4 ~ d a8 |   % 73
-	a-. d-. fis-. a4 fis8( | g8. fis16 e8 c4) e8( |   % 75
-	g8. fis16 e8 a8 g e | fis4. ~ fis4) dis16-. dis-. |   % 77
-	dis8-. e-. fis-. g4( e8 | cis4 e8 fis4 d8 |   % 79
-	b4 d8 e4 cis8 | ais4 cis8 d4) b8( |   % 81
-	b8. cis16 d8 d4) b8( | b8. cis16 d8 d4) b8( |   % 83
-	b8. cis16 d8 fis e d | e8) cis( d e fis g |   % 85
+CodaR = \relative c {
+	\clef G
+	\key d \major
+	\once \override Staff.TimeSignature.stencil = ##f  % this is just the coda; suppress time signature
+	\time 6/8
 
-	% Chorus
-	a8. fis16 a8 a8. fis16 a8 | b8. a16 g8 a4) a8( |   % 87
-	b8. a16 g8 a fis d | g8. fis16 d8 e4.) |   % 89
-	a8.( fis16 a8 a8 fis a | d8. cis16 b8 a4) a8( |   % 91
-	d8. cis16 b8 a fis d | a'4. ~ a4) a,8( |   % 93
+	\set Score.currentBarNumber = #69
+	\once \override Score.RehearsalMark.extra-offset = #'( -5.5 . 0 )  % Hack to align coda symbol with clef, from http://lilypond.org/doc/v2.18/Documentation/snippets/repeats#positioning-segno-and-coda-with-line-break.ly
+	\mark \markup {
+	  \general-align #Y #CENTER \musicglyph #"scripts.coda"
+	  \general-align #Y #CENTER { CODA }
+	}
 
-	% 2nd theme
-	a d fis fis8. e16 d8 | b8. cis16 d8 b8. cis16 d8 |   % 95
-	g, cis e e8. d16 cis8 | d8. cis16 b8 a4) a8( |   % 97
-	a d fis fis8. e16 fis8 | g8. fis16 d8 g8. fis16 d8 |   % 99
-	e fis e e8. d16 cis8 | %100
+	\partial 8 \hideNotes g'''8( \unHideNotes | \bar ""
 	d2 ~ d8) a( |   % 101
 
 	% Coda
@@ -99,14 +104,14 @@ PianoR = \relative c' {
 	fis8. g16 fis8 fis e fis | g4 b,8 g' fis d |   % 107
 	e fis e e8. d16 cis8 |
 		\once \override Script.padding = #'2.0  % bump fermata up to avoid slur
-		d2.\fermata) 
+		d2.\fermata)
 	\bar "|."
 }
 
 PianoL = \relative c {
 	\clef bass
 	\key d \major
-	\time 6/8 
+	\time 6/8
 	\set Staff.pedalSustainStyle = #'mixed
 	
 	d8\SD a' d e d a | d, a' d e d a |   % 3
@@ -152,29 +157,22 @@ PianoL = \relative c {
 	d,\SU\SD a' d d, a' d | d, a' d d, a' d |   % 63
 	g,,\SU\SD d' g g, d' g | fis,\SU\SD cis' fis fis, cis' fis |   % 65
 	g,\SU\SD d' g a,\SU\SD e' a | b,\SU\SD fis' d' g,,\SU\SD d' g |   % 67
-	a,\SU\SD e' d' a, e' d' | a,\SU\SD e' cis' a,\SU\SD e' cis' |   % 69
+	a,\SU\SD e' d' a, e' d' |
+	\once \override Staff.PianoPedalBracket.edge-height = #'(1.0 . 0.0)  % suppress ending pedal lift because this is a dal segno
+	a,\SU\SD e' cis' a, e' cis' |   % 69
+}
 
-	% Recapitulation
-	d,\SU\SD a' d e d a | c,\SU\SD g' c d c g |   % 71
-	c,\SU\SD g' c d c g | d\SU\SD a' d e d a |   % 73
-	d,\SU\SD a' d e d a | c,\SU\SD g' c d c g |   % 75
-	c,\SU\SD g' c d c g | b,\SU\SD fis' b cis b fis |   % 77
-	b,\SU\SD fis' b e,\SU\SD b' e | a,,\SU\SD e' a d,\SU\SD a' d |   % 79
-	g,,\SU\SD d' g fis\SU\SD cis' fis | fis,,\SU\SD cis' fis b,\SU\SD fis' b |   % 81
-	g,\SU\SD d' g g,\SU\SD d' g | g,\SU\SD d' g g,\SU\SD d' g |   % 83
-	g,\SU\SD d' g e,\SU\SD b' e | a,\SU\SD a' b cis d e |   % 85
+CodaL = \relative c {
+	\clef bass
+	\key d \major
+	\once \override Staff.TimeSignature.stencil = ##f  % this is just the coda; suppress time signature
+	\time 6/8
+	\set Staff.pedalSustainStyle = #'bracket
 
-	% Chorus
-	d,8\SU\SD a' cis d cis a | g\SU\SD b d fis,\SU\SD a d |   % 87
-	g,\SU\SD b d fis,\SU\SD a b | e,\SU\SD g d' a,\SU\SD g' cis |   % 89
-	d,8\SU\SD a' cis d cis a | g\SU\SD b d fis,\SU\SD a d |   % 91
-	g,\SU\SD b d fis,\SU\SD a b | e,\SU\SD g d' a,\SU\SD g' cis |   % 93
-
-	% 2nd theme
-	d,\SU\SD a' d d, a' d | g,,\SU\SD d' g g,\SU\SD d' g |   % 95
-	a,\SU\SD e' a a, e' a | d,\SU\SD a' d d,\SU\SD a' d |   % 97
-	d,\SU\SD a' d d, a' d | g,,\SU\SD d' g g, d' g |   % 99
-	a,\SU\SD e' a a, e' a | d,\SU\SD a' d d, a' d |   % 101
+	% 2nd theme, 2nd ending
+	\once \override Staff.PianoPedalBracket.edge-height = #'(0.0 . 1.0)  % suppress starting pedal lift because this is a coda
+	\partial 8 s8\SD |
+	d\SU\SD a' d d, a' d |   % 101
 
 	% Coda
 	d,\SU\SD a' d d, a' d | g,,\SU\SD d' g g, d' g |   % 103
@@ -183,7 +181,6 @@ PianoL = \relative c {
 	a,\SU\SD e' a a,\SU\SD e' a | d,\SU\SD a' d
 		\once \override Script.padding = #'1.0  % bump fermata up to separate arch from duration dot
 		fis4.\fermata
-	\bar "|."
 }
 
 dynamics = {
@@ -214,20 +211,12 @@ dynamics = {
 	s s s s
 	s\< s s\! s
 	s\> s s s4. s4 s8\p
-	
-	% Recapitulation
-	s2. s s s
-	s s s\< s
-	s4. s\!\> s2. s s4. s\!
-	s2. s s\< s
-	
-	% Chorus
-	s\f s s s
-	s s s s2\> s8 s\mp
-	
-	% 2nd theme
-	s2. s s s
-	s s s s4.\> s4 s8\p
+}
+
+coda_dynamics = {
+	% 2nd theme 2nd ending
+	\partial 8 s8 |
+	s4.\> s4 s8\p
 	
 	% Coda
 	% set up a ritardando
@@ -256,13 +245,29 @@ dynamics = {
 			\set Score.skipBars = ##t  % automatically number multi-measure rests
 			\set Score.melismaBusyProperties = #'()  % some hack I no longer remember about lyrics under ties and slurs
 			\context PianoStaff
-			<< 
+			<<
 				\context Staff="Piano (R)" \transpose d cis \PianoR
 				\new Dynamics = "dynamics" \dynamics
 				\context Staff="Piano (L)" \transpose d cis \PianoL
 			>>
 		}
-		
+		\layout {
+			\context {
+				\PianoStaff
+			}
+		}
+	}
+	\score {
+		\simultaneous {
+			\set Score.skipBars = ##t  % automatically number multi-measure rests
+			\set Score.melismaBusyProperties = #'()  % some hack I no longer remember about lyrics under ties and slurs
+			\context PianoStaff
+			<<
+				\context Staff="Piano (R)" \transpose d cis \CodaR
+				\new Dynamics = "dynamics" \coda_dynamics
+				\context Staff="Piano (L)" \transpose d cis \CodaL
+			>>
+		}
 		\layout {
 			\context {
 				\PianoStaff
@@ -288,13 +293,29 @@ dynamics = {
 			\set Score.skipBars = ##t
 			\set Score.melismaBusyProperties = #'()
 			\context PianoStaff
-			<< 
+			<<
 				\context Staff="Piano (R)" \PianoR
 				\new Dynamics = "dynamics" \dynamics
 				\context Staff="Piano (L)" \PianoL
 			>>
 		}
-		
+		\layout {
+			\context {
+				\PianoStaff
+			}
+		}
+	}
+	\score {
+		\simultaneous {
+			\set Score.skipBars = ##t
+			\set Score.melismaBusyProperties = #'()
+			\context PianoStaff
+			<<
+				\context Staff="Piano (R)" \CodaR
+				\new Dynamics = "dynamics" \coda_dynamics
+				\context Staff="Piano (L)" \CodaL
+			>>
+		}
 		\layout {
 			\context {
 				\PianoStaff
