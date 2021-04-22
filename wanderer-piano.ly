@@ -158,7 +158,9 @@ PianoL = \relative c {
 	g,,\SU\SD d' g g, d' g | fis,\SU\SD cis' fis fis, cis' fis |   % 65
 	g,\SU\SD d' g a,\SU\SD e' a | b,\SU\SD fis' d' g,,\SU\SD d' g |   % 67
 	a,\SU\SD e' d' a, e' d' |
-	\once \override Staff.PianoPedalBracket.edge-height = #'(1.0 . 0.0)  % suppress ending pedal lift because this is a dal segno
+	% suppress ending pedal lift because this is a dal segno
+	% this has to go before the \SD since it applies to the next \SD-to-\SU bracket
+	\once \override Staff.PianoPedalBracket.edge-height = #'(1.0 . 0.0)
 	a,\SU\SD e' cis' a, e' cis' |   % 69
 }
 
@@ -227,6 +229,65 @@ coda_dynamics = {
 	s s s s\stopTextSpan
 }
 
+CodaR_alt = \relative c {
+	\clef G
+	\key d \major
+	\once \override Staff.TimeSignature.stencil = ##f  % this is just the coda; suppress time signature
+	\time 6/8
+
+	\set Score.currentBarNumber = #78
+	\once \override Score.RehearsalMark.extra-offset = #'( 12.0 . 1.0 )  % shift text right to start at clef
+	\mark \markup {
+	  alternative Coda from measure 28
+	}
+
+	\partial 8
+	% 2nd theme, 2nd ending
+	<< { \hideNotes a'''8\( \unHideNotes | \bar "" a4. ~ a4\) }
+		\\ { s8 | b,4. cis4 } >> <a e'>8 |
+	<fis d'>8 <a fis'> <d a'> <a d> <a fis'> <d a'> |
+	<g, d'>8 <b g'> <d b'> <d a'> <b g'> <g b> |
+	<a cis>8 <a e'> <cis a'> <cis g'> <a fis'> <a e'>8 |
+	<a fis'>8 <fis d'> <g d'> <fis d'> <a fis'> <g e'> |
+	<fis d'>8 <a fis'> <d a'> <a d> <a fis'> <d a'> |
+	<< { a'8( g) } \\ { <b, d>4 } >> <b d fis>8 <b d e> <b d fis> <b d g> |
+	<d a'>8 <a d> <d a'> <cis a'> <g cis> <g e'> |
+	<fis d'>8 a fis a d fis |
+
+	% Coda
+	a8.( b16 a8 a g a | b4. b,4) a'8( |   % 103
+	g8. a16 g8 g fis g | a4.) a,4( d8 |   % 105
+	fis8. g16 fis8 fis e fis | g4 b,8 g' fis d |   % 107
+	e fis e e8. d16 cis8 |
+		\once \override Script.padding = #'2.0  % bump fermata up to avoid slur
+		d2.\fermata)
+	\bar "|."
+}
+
+CodaL_alt = \relative c {
+	\clef bass
+	\key d \major
+	\once \override Staff.TimeSignature.stencil = ##f  % this is just the coda; suppress time signature
+	\time 6/8
+	\set Staff.pedalSustainStyle = #'bracket
+
+	\once \override Staff.PianoPedalBracket.edge-height = #'(0.0 . 1.0)  % suppress starting pedal lift because this is a coda
+	\partial 8 s8\SD |
+	% 2nd theme, 2nd ending
+	e\SU\SD g d' a,\SU\SD g' a\(\mf |
+	a\SU\SD d fis fis8. e16 d8 | b8.\SU\SD cis16 d8 b8.\SU\SD cis16 d8 |
+	g,\SU\SD cis e e8. d16 cis8 | d8.\SU\SD cis16 b8 a4\)\SU\SD a8\( |
+	a\SU\SD d fis fis8. e16 fis8 | g8.\SU\SD fis16 d8 g8\SU\SD fis\SU\SD d\SU\SD |
+	e\SU\SD fis e e8.\SU\SD d16 cis8 | d4\)\SU\SD a8\p fis a d |
+
+	% Coda
+	fis,8\SU\SD a d fis, a d | g,\SU\SD b d e,,\SU\SD b' g' |
+	a,\SU\SD cis a' cis,\SU\SD e a | d,\SU\SD fis a fis,\SU\SD d' a' |   % 105
+	b,\SU\SD fis' d' a,\SU\SD fis' d' | g,,\SU\SD g' d' e,,\SU\SD g' b |   % 107
+	a,\SU\SD a' d a,\SU\SD a' g' | d,\SU\SD a' d
+		\once \override Script.padding = #'1.0  % bump fermata up to separate arch from duration dot
+		fis4.\fermata
+}
 
 % C sharp major
 #(set-global-staff-size 18.25)
@@ -266,6 +327,23 @@ coda_dynamics = {
 				\context Staff="Piano (R)" \transpose d cis \CodaR
 				\new Dynamics = "dynamics" \coda_dynamics
 				\context Staff="Piano (L)" \transpose d cis \CodaL
+			>>
+		}
+		\layout {
+			\context {
+				\PianoStaff
+			}
+		}
+	}
+	\score {
+		\simultaneous {
+			\set Score.skipBars = ##t  % automatically number multi-measure rests
+			\set Score.melismaBusyProperties = #'()  % some hack I no longer remember about lyrics under ties and slurs
+			\context PianoStaff
+			<<
+				\context Staff="Piano (R)" \transpose d cis \CodaR_alt
+				%\new Dynamics = "dynamics" \coda_dynamics
+				\context Staff="Piano (L)" \transpose d cis \CodaL_alt
 			>>
 		}
 		\layout {
@@ -314,6 +392,23 @@ coda_dynamics = {
 				\context Staff="Piano (R)" \CodaR
 				\new Dynamics = "dynamics" \coda_dynamics
 				\context Staff="Piano (L)" \CodaL
+			>>
+		}
+		\layout {
+			\context {
+				\PianoStaff
+			}
+		}
+	}
+	\score {
+		\simultaneous {
+			\set Score.skipBars = ##t
+			\set Score.melismaBusyProperties = #'()
+			\context PianoStaff
+			<<
+				\context Staff="Piano (R)" \CodaR_alt
+				%\new Dynamics = "dynamics" \coda_dynamics
+				\context Staff="Piano (L)" \CodaL_alt
 			>>
 		}
 		\layout {
