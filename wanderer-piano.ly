@@ -7,6 +7,10 @@
 
 \version "2.20.0"
 
+#(use-modules (guile-user))  % required to see -e definitions but generates a warning: http://lilypond.1069038.n5.nabble.com/loglevel-ERROR-still-emits-Warning-message-td73314.html
+% Set default key. It'd be enough here to do (define-public destkey #{ cis #}) but somehow -e doesn't like that
+#(if (not (defined? 'indestkey)) (define-public indestkey (define-music-function (parser location music) (ly:music?) #{ \transpose d cis $music #})))
+
 #(set-default-paper-size "letter")
 #(ly:set-option 'point-and-click #f)
 
@@ -289,8 +293,23 @@ CodaL_alt = \relative c {
 		fis4.\fermata
 }
 
-% C sharp major
-#(set-global-staff-size 18.25)
+coda_dynamics_alt = {
+	\partial 8 s8 |
+	s4.\> s4 s8\! |
+	% 2nd theme revoiced
+	s2. s s s
+	s s s s8 s4\p s4.
+
+	% Coda
+	% set up a ritardando
+		\textSpannerDown
+		\once \override TextSpanner.bound-details.left.text = #"rit. "
+		\once \override TextSpanner.bound-details.left-broken.text = ##f  % suppress reprinting "rit." after line wrap
+	s2.\startTextSpan s s s
+	s s s s\stopTextSpan
+}
+
+#(set-global-staff-size 20)
 \book {
 	\header {
 		title = "Wanderer"
@@ -299,7 +318,7 @@ CodaL_alt = \relative c {
 	}
 	\paper {
 		ragged-last-bottom = ##f
-		system-system-spacing.padding = #3  % increase padding by 2 staff spaces to make whitespace below pedal bracket resemble whitespace below bottom of unbracketed staff. Expect this to result in about 4 pages in lilypond 2.20.
+		%system-system-spacing.padding = #3  % increase padding by 2 staff spaces to make whitespace below pedal bracket resemble whitespace below bottom of unbracketed staff. Expect this to result in about 4 pages in lilypond 2.20. But after changing the font size to 20 this seems to have no effect.
 	}
 	\score {
 		\simultaneous {
@@ -307,9 +326,9 @@ CodaL_alt = \relative c {
 			\set Score.melismaBusyProperties = #'()  % some hack I no longer remember about lyrics under ties and slurs
 			\context PianoStaff
 			<<
-				\context Staff="Piano (R)" \transpose d cis \PianoR
+				\context Staff="Piano (R)" \indestkey \PianoR
 				\new Dynamics = "dynamics" \dynamics
-				\context Staff="Piano (L)" \transpose d cis \PianoL
+				\context Staff="Piano (L)" \indestkey \PianoL
 			>>
 		}
 		\layout {
@@ -324,9 +343,9 @@ CodaL_alt = \relative c {
 			\set Score.melismaBusyProperties = #'()  % some hack I no longer remember about lyrics under ties and slurs
 			\context PianoStaff
 			<<
-				\context Staff="Piano (R)" \transpose d cis \CodaR
+				\context Staff="Piano (R)" \indestkey \CodaR
 				\new Dynamics = "dynamics" \coda_dynamics
-				\context Staff="Piano (L)" \transpose d cis \CodaL
+				\context Staff="Piano (L)" \indestkey \CodaL
 			>>
 		}
 		\layout {
@@ -341,9 +360,9 @@ CodaL_alt = \relative c {
 			\set Score.melismaBusyProperties = #'()  % some hack I no longer remember about lyrics under ties and slurs
 			\context PianoStaff
 			<<
-				\context Staff="Piano (R)" \transpose d cis \CodaR_alt
-				%\new Dynamics = "dynamics" \coda_dynamics
-				\context Staff="Piano (L)" \transpose d cis \CodaL_alt
+				\context Staff="Piano (R)" \indestkey \CodaR_alt
+				\new Dynamics = "dynamics" \coda_dynamics_alt
+				\context Staff="Piano (L)" \indestkey \CodaL_alt
 			>>
 		}
 		\layout {
@@ -353,69 +372,3 @@ CodaL_alt = \relative c {
 		}
 	}
 }
-
-
-% D major
-#(set-global-staff-size 19)
-\book {
-	\header {
-		title = "Wanderer"
-		composer = "Andrew Geng"
-		copyright = "Copyright © 2007 by Andrew Geng"
-	}
-	\paper {
-		ragged-last-bottom = ##f
-	}
-	\score {
-		\simultaneous {
-			\set Score.skipBars = ##t
-			\set Score.melismaBusyProperties = #'()
-			\context PianoStaff
-			<<
-				\context Staff="Piano (R)" \PianoR
-				\new Dynamics = "dynamics" \dynamics
-				\context Staff="Piano (L)" \PianoL
-			>>
-		}
-		\layout {
-			\context {
-				\PianoStaff
-			}
-		}
-	}
-	\score {
-		\simultaneous {
-			\set Score.skipBars = ##t
-			\set Score.melismaBusyProperties = #'()
-			\context PianoStaff
-			<<
-				\context Staff="Piano (R)" \CodaR
-				\new Dynamics = "dynamics" \coda_dynamics
-				\context Staff="Piano (L)" \CodaL
-			>>
-		}
-		\layout {
-			\context {
-				\PianoStaff
-			}
-		}
-	}
-	\score {
-		\simultaneous {
-			\set Score.skipBars = ##t
-			\set Score.melismaBusyProperties = #'()
-			\context PianoStaff
-			<<
-				\context Staff="Piano (R)" \CodaR_alt
-				%\new Dynamics = "dynamics" \coda_dynamics
-				\context Staff="Piano (L)" \CodaL_alt
-			>>
-		}
-		\layout {
-			\context {
-				\PianoStaff
-			}
-		}
-	}
-}
-
