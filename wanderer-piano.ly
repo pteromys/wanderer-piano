@@ -89,7 +89,10 @@ PianoR = \relative c' {
 CodaR = \relative c {
 	\clef G
 	\key d \major
-	\once \override Staff.TimeSignature.stencil = ##f  % this is just the coda; suppress time signature
+	% this is just the coda; suppress time signature and tempo mark
+	\override Score.MetronomeMark.stencil = ##f
+	\once \override Staff.TimeSignature.stencil = ##f
+	\tempo 4. = 88  % needed as a hint for midi
 	\time 6/8
 
 	\set Score.currentBarNumber = #69
@@ -236,7 +239,10 @@ coda_dynamics = {
 CodaR_alt = \relative c {
 	\clef G
 	\key d \major
-	\once \override Staff.TimeSignature.stencil = ##f  % this is just the coda; suppress time signature
+	% this is just the coda; suppress time signature and tempo mark
+	\override Score.MetronomeMark.stencil = ##f
+	\once \override Staff.TimeSignature.stencil = ##f
+	\tempo 4. = 88  % needed as a hint for midi
 	\time 6/8
 
 	\set Score.currentBarNumber = #78
@@ -336,6 +342,7 @@ coda_dynamics_alt = {
 				\PianoStaff
 			}
 		}
+		% \midi {}  % for typo checking
 	}
 	\score {
 		\simultaneous {
@@ -353,6 +360,7 @@ coda_dynamics_alt = {
 				\PianoStaff
 			}
 		}
+		% \midi {}  % for typo checking
 	}
 	\score {
 		\simultaneous {
@@ -370,5 +378,6 @@ coda_dynamics_alt = {
 				\PianoStaff
 			}
 		}
+		% \midi {}  % for typo checking
 	}
 }
