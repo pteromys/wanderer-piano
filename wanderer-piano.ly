@@ -14,10 +14,6 @@
 #(set-default-paper-size "letter")
 #(ly:set-option 'point-and-click #f)
 
-\paper {
-	print-page-number = ##t
-}
-
 SU = \sustainOff
 SD = \sustainOn
 
@@ -30,52 +26,55 @@ PianoR = \relative c' {
 	
 	\slurUp
 	R2.*3 |   % 3
-	r4 r8 r4 a'8 |   % 5
+	r4. r4 a'8\( |   % 5
 
 	% Opening theme
 	\mark \markup { \musicglyph #"scripts.segno" }
-	a-. d-. fis-. a4 fis8( | g8. fis16 e8 c4) e8( |   % 7
-	g8. fis16 e8 c4) e8( | c)-. d4 ~ d a8 |   % 9
-	a-. d-. fis-. a4 fis8( | g8. fis16 e8 c4) e8( |   % 11
-	g8. fis16 e8 a8 g e | fis4. ~ fis4) dis16-. dis-. |   % 13
-	dis8-. e-. fis-. g4( e8 | cis4 e8 fis4 d8 |   % 15
-	b4 d8 e4 cis8 | ais4 cis8 d4) b8( |   % 17
-	b8. cis16 d8 d4) b8( | b8. cis16 d8 d4) b8( |   % 19
-	b8. cis16 d8 fis e d | e8) cis( d e fis g |   % 21
+	\once \override Score.FootnoteItem.annotation-line = ##f
+	\once \override Score.FootnoteSpanner.baseline-skip = #3.0
+	a-\footnote "*" #'(0 . 3) "* Articulate at least one staccato by keeping the pedal lifted and holding the left hand notes by hand." -.
+	d-. fis-. a4 fis8 | g8. fis16 e8 c4 e8 |   % 7
+	g8. fis16 e8 c4 e8 | c-. d4 ~ d\) a8 |   % 9
+	a-.^\markup \italic simile d-. fis-. a4 fis8 | g8. fis16 e8 c4 e8 |   % 11
+	g8. fis16 e8 a8 g e | fis4. ~ fis4 dis16-. dis-. |   % 13
+	dis8-. e-. fis-. g4 e8 | cis4 e8 fis4 d8 |   % 15
+	b4 d8 e4 cis8 | ais4 cis8 d4 b8 |   % 17
+	b8. cis16 d8 d4 b8 | b8. cis16 d8 d4 b8 |   % 19
+	b8. cis16 d8 fis e d | e8 cis d e fis g |   % 21
 
 	% Chorus
-	a8.)( fis16 a8 a8. fis16 a8 | b8. a16 g8 a4) a8( |   % 23
-	b8. a16 g8 a fis d | g8. fis16 d8 e4.) |   % 25
-	a8.( fis16 a8 a8 fis a | d8. cis16 b8 a4) a8( |   % 27
-	d8. cis16 b8 a fis d | a'4. ~ a4) a,8( |   % 29
+	a8. fis16 a8 a8. fis16 a8 | b8. a16 g8 a4 a8 |   % 23
+	b8. a16 g8 a fis d | g8. fis16 d8 e4. |   % 25
+	a8. fis16 a8 a8( fis) a | d8. cis16 b8 a4 a8 |   % 27
+	d8. cis16 b8 a fis d | a'4. ~ a4 a,8 |   % 29
 
 	% 2nd theme
-	a d fis fis8. e16 d8 | b8. cis16 d8 b8. cis16 d8 |   % 31
-	g, cis e e8. d16 cis8 | d8. cis16 b8 a4) a8( |   % 33
+	a d fis fis8. e16 d8 | b8. cis16 d8 b8 cis d |   % 31
+	g, cis e e8. d16 cis8 | d8. cis16 b8 a4 a8 |   % 33
 	a d fis fis8. e16 fis8 | g8. fis16 d8 g8. fis16 d8 |   % 35
 	e fis e e8. d16 cis8 |   % 36
 	\mark \markup { \musicglyph #"scripts.coda" }
-	d4.) cis4-- fis,8( |   % 37
+	d4. cis4-- fis,8\( |   % 37
 
 	% Development 1
 	b cis d d8. cis16 b8 | b cis d d8. cis16 b8 |   % 39
-	cis d cis cis8. b16 a8 | fis4. a4) fis8( |   % 41
+	cis d cis cis8. b16 a8 | fis4. a4\) fis8^\markup { \halign #CENTER \italic simile } |   % 41
 	b cis d d8. cis16 b8 | b cis d d8. e16 fis8 |   % 43
-	e fis e e8. fis16 g8 | fis4. cis4) d8( |   % 45
+	e fis e e8. fis16 g8 | fis4. cis4 d8 |   % 45
 	b cis d d8. cis16 b8 | d e fis fis8. e16 d8 |   % 47
-	fis g a a8. g16 fis8 | a8. g16 fis8 e4) b8( |   % 49
-	e fis g g8. fis16 e8 | d4 fis8 b,4) cis8( |   % 51
-	d e fis fis8. e16 d8 | cis4 e8 a,4) a8( |   % 53
+	fis g a a8. g16 fis8 | a8. g16 fis8 e4 b8 |   % 49
+	e fis g g8. fis16 e8 | d4 fis8 b,4 cis8 |   % 51
+	d e fis fis8. e16 d8 | cis4 e8 a,4 a8 |   % 53
 
 	% Development 2
 	d4. a4 fis'8 | fis8. e16 d8 a'4. |   % 55
-	g8 a b b8. a16 g8 | a4 fis8 d4.) |   % 57
-	e( a,4 e'8 | fis4. d4 b8 |   % 59
-	e4. b4 d8 | cis4. a4) a8( |   % 61
+	g8 a b b8. a16 g8 | a4 fis8 d4. |   % 57
+	e a,4 e'8 | fis4. d4 b8 |   % 59
+	e4. b4 d8 | cis4. a4 a8 |   % 61
 	d4. a4 fis'8 | fis8. e16 d8 a'4. |   % 63
-	b8 cis d d8. cis16 b8 | cis4 a8 fis4.) |   % 65
-	g( a4) e8( | fis4. g4) d8( |   % 67
-	e fis g g8. fis16 d8 | e4. ~ e4) a,8 |   % 69
+	b8 cis d d8. cis16 b8 | cis4 a8 fis4. |   % 65
+	g a4 e8 | fis4. g4 d8 |   % 67
+	e fis g g8. fis16 d8 | e4. ~ e4 a,8 |   % 69
 	% right-align the D.S. al Coda mark
 	\once \override Score.RehearsalMark.break-visibility = #end-of-line-visible
 	\once \override Score.RehearsalMark.self-alignment-X = #RIGHT
@@ -102,16 +101,17 @@ CodaR = \relative c {
 	  \general-align #Y #CENTER { CODA }
 	}
 
-	\partial 8 \hideNotes g'''8( \unHideNotes | \bar ""
-	d2 ~ d8) a( |   % 101
+	% somehow using s8 causes "insane spring distance" errors so use an invisible note instead
+	\partial 8 \hideNotes g'''8 \unHideNotes | \bar ""
+	d2 ~ d8 a |   % 101
 
 	% Coda
-	a'8. b16 a8 a g a | b4. b,4) a'8( |   % 103
-	g8. a16 g8 g fis g | a4.) a,4( d8 |   % 105
+	a'8. b16 a8 a g a | b4. b,4 a'8 |   % 103
+	g8. a16 g8 g fis g | a4. a,4 d8 |   % 105
 	fis8. g16 fis8 fis e fis | g4 b,8 g' fis d |   % 107
 	e fis e e8. d16 cis8 |
-		\once \override Script.padding = #'2.0  % bump fermata up to avoid slur
-		d2.\fermata)
+		\once \override Script.padding = #'1.0  % bump fermata up to avoid staff
+		d2.\fermata
 	\bar "|."
 }
 
@@ -120,8 +120,10 @@ PianoL = \relative c {
 	\key d \major
 	\time 6/8
 	\set Staff.pedalSustainStyle = #'mixed
+	%\override PianoPedalBracket.bound-padding = #'5.0  % I thought this would make the pedal brackets keep away from the next system but it didn't do anything
 	
 	d8\SD a' d e d a | d, a' d e d a |   % 3
+	\set Staff.pedalSustainStyle = #'bracket
 	d, a' d e d a | d, a' d e d a |   % 5
 
 	% Opening theme
@@ -136,9 +138,9 @@ PianoL = \relative c {
 
 	% Chorus
 	d,8\SU\SD a' cis d cis a | g\SU\SD b d fis,\SU\SD a d |   % 23
-	g,\SU\SD b d fis,\SU\SD a b | e,\SU\SD g d' a,\SU\SD g' cis |   % 25
+	g,\SU\SD b d fis,\SU\SD a b | e,\SU\SD g b a,\SU\SD g' cis |   % 25
 	d,8\SU\SD a' cis d cis a | g\SU\SD b d fis,\SU\SD a d |   % 27
-	g,\SU\SD b d fis,\SU\SD a b | e,\SU\SD g d' a,\SU\SD g' cis |   % 29
+	g,\SU\SD b d fis,\SU\SD a d | e,\SU\SD g d' a,\SU\SD g' cis |   % 29
 
 	% 2nd theme
 	d,\SU\SD a' d d, a' d | g,,\SU\SD d' g g,\SU\SD d' g |   % 31
@@ -212,14 +214,14 @@ dynamics = {
 	% Development 1
 	s2. s s s
 	s s s s
-	s\< s s4 s\! s s4. s4 s8\mp
+	s\< s s s4.\! s4\> s8\p
 	s2. s s s
 	
 	% Development 2
 	s2. s s s
 	s s s s
-	s\< s s\! s
-	s\> s s s4. s4 s8\p
+	s\< s s\! s\>
+	s\mp s s s
 }
 
 coda_dynamics = {
@@ -246,31 +248,32 @@ CodaR_alt = \relative c {
 	\time 6/8
 
 	\set Score.currentBarNumber = #78
-	\once \override Score.RehearsalMark.extra-offset = #'( 12.0 . 1.0 )  % shift text right to start at clef
+	\once \override Score.RehearsalMark.extra-offset = #'( 15.0 . 0.0 )  % shift text right to start at clef
 	\mark \markup {
-	  alternative Coda from measure 28
+	  alternative Coda starting at measure 28
 	}
 
 	\partial 8
-	% 2nd theme, 2nd ending
-	<< { \hideNotes a'''8\( \unHideNotes | \bar "" a4. ~ a4\) }
-		\\ { s8 | b,4. cis4 } >> <a e'>8 |
+	% somehow using s8 causes "insane spring distance" errors so use an invisible note instead
+	\hideNotes a'''8 \unHideNotes | \bar ""
+	% 2nd theme revoiced
+	<< { a4. ~ a4 } \\ { b,4. cis4 } >> <a e'>8^\pp |
 	<fis d'>8 <a fis'> <d a'> <a d> <a fis'> <d a'> |
-	<g, d'>8 <b g'> <d b'> <d a'> <b g'> <g b> |
+	<g, d'>8 <b g'> <g' b> <d a'> <b g'> <g b> |
 	<a cis>8 <a e'> <cis a'> <cis g'> <a fis'> <a e'>8 |
 	<a fis'>8 <fis d'> <g d'> <fis d'> <a fis'> <g e'> |
 	<fis d'>8 <a fis'> <d a'> <a d> <a fis'> <d a'> |
-	<< { a'8( g) } \\ { <b, d>4 } >> <b d fis>8 <b d e> <b d fis> <b d g> |
+	<< { a'8[ g] } \\ { <b, d>4 } >> <b d fis>8 <b d e>-- <b d fis>-- <b d e g>-- |
 	<d a'>8 <a d> <d a'> <cis a'> <g cis> <g e'> |
 	<fis d'>8 a fis a d fis |
 
 	% Coda
-	a8.( b16 a8 a g a | b4. b,4) a'8( |   % 103
-	g8. a16 g8 g fis g | a4.) a,4( d8 |   % 105
+	a8. b16 a8 a g a | b4. b,4 a'8 |   % 103
+	g8. a16 g8 g fis g | a4. a,4 d8 |   % 105
 	fis8. g16 fis8 fis e fis | g4 b,8 g' fis d |   % 107
 	e fis e e8. d16 cis8 |
-		\once \override Script.padding = #'2.0  % bump fermata up to avoid slur
-		d2.\fermata)
+		\once \override Script.padding = #'1.0  % bump fermata up to avoid staff
+		d2.\fermata
 	\bar "|."
 }
 
@@ -283,12 +286,12 @@ CodaL_alt = \relative c {
 
 	\once \override Staff.PianoPedalBracket.edge-height = #'(0.0 . 1.0)  % suppress starting pedal lift because this is a coda
 	\partial 8 s8\SD |
-	% 2nd theme, 2nd ending
-	e\SU\SD g d' a,\SU\SD g' a\(\mf |
-	a\SU\SD d fis fis8. e16 d8 | b8.\SU\SD cis16 d8 b8.\SU\SD cis16 d8 |
-	g,\SU\SD cis e e8. d16 cis8 | d8.\SU\SD cis16 b8 a4\)\SU\SD a8\( |
-	a\SU\SD d fis fis8. e16 fis8 | g8.\SU\SD fis16 d8 g8\SU\SD fis\SU\SD d\SU\SD |
-	e\SU\SD fis e e8.\SU\SD d16 cis8 | d4\)\SU\SD a8\p fis a d |
+	% 2nd theme revoiced
+	e\SU\SD g d' a,[\SU\SD g'] a\mf |
+	a\SU\SD d fis fis8. e16 d8 | b8.\SU\SD cis16 d8 b8\SU\SD cis d |
+	g,\SU\SD cis e e8. d16 cis8 | d8.\SU\SD cis16 b8 a4\SU\SD a8 |
+	a\SU\SD d fis fis8. e16 fis8 | g8.\SU\SD fis16 d8 g8-- fis-- d-- |
+	e\SU\SD fis e e8.\SU\SD d16 cis8 | d4\SU\SD a8 fis a d |
 
 	% Coda
 	fis,8\SU\SD a d fis, a d | g,\SU\SD b d e,,\SU\SD b' g' |
@@ -323,8 +326,12 @@ coda_dynamics_alt = {
 		copyright = "Copyright © 2007 by Andrew Geng"
 	}
 	\paper {
+		print-page-number = ##t
 		ragged-last-bottom = ##f
 		%system-system-spacing.padding = #3  % increase padding by 2 staff spaces to make whitespace below pedal bracket resemble whitespace below bottom of unbracketed staff. Expect this to result in about 4 pages in lilypond 2.20. But after changing the font size to 20 this seems to have no effect.
+		last-bottom-spacing.padding = #3  % Add a little space between the pedal bracket and the footnotes
+		footnote-separator-markup = \markup {}  % suppress footnote separator line since it looks cluttered next to pedal bracket
+		footnote-footer-padding = 12\pt  % stick a line between footnote and copyright message
 	}
 	\score {
 		\simultaneous {
