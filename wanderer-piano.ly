@@ -133,7 +133,7 @@ PianoL = \relative c {
 	c,\SU\SD g' c d c g | b,\SU\SD fis' b cis b fis |   % 13
 	b,\SU\SD fis' b e,\SU\SD g b | a,\SU\SD e' a d,\SU\SD fis a |   % 15
 	g,\SU\SD d' g cis,\SU\SD e g | fis,\SU\SD cis' fis b,\SU\SD d fis |   % 17
-	g,\SU\SD d' g g,\SU\SD d' g | g,\SU\SD d' g g,\SU\SD d' g |   % 19
+	g,\SU\SD d' g g, d' g | g,\SU\SD d' g g, d' g |   % 19
 	g,\SU\SD d' g e,\SU\SD b' e | a,\SU\SD a' b cis d e |   % 21
 
 	% Chorus
@@ -188,7 +188,7 @@ CodaL = \relative c {
 	% Coda
 	d,\SU\SD a' d d, a' d | g,,\SU\SD d' g g, d' g |   % 103
 	a,\SU\SD e' a a, e' a | d,\SU\SD a' d cis,\SU\SD a' cis |   % 105
-	b,\SU\SD fis' b b, fis' b | g,\SU\SD d' g g, d' g |   % 107
+	b,\SU\SD fis' b b, fis' b | g,\SU\SD d' g g,\SU\SD d' g |   % 107
 	a,\SU\SD e' a a,\SU\SD e' a | d,\SU\SD a' d
 		\once \override Script.padding = #'1.0  % bump fermata up to separate arch from duration dot
 		fis4.\fermata
@@ -250,20 +250,30 @@ CodaR_alt = \relative c {
 	\set Score.currentBarNumber = #78
 	\once \override Score.RehearsalMark.extra-offset = #'( 15.0 . 0.0 )  % shift text right to start at clef
 	\mark \markup {
-	  alternative Coda starting at measure 28
+	  alternative Coda starting at measure 20
 	}
 
 	\partial 8
 	% somehow using s8 causes "insane spring distance" errors so use an invisible note instead
 	\hideNotes a'''8 \unHideNotes | \bar ""
+	e8 <a, cis> <a d> <a e'> <a fis'> <a g'> |
+	% Chorus
+	<a e' a>8. <d fis>16 <a e' a>8 <a cis a'>8. <d fis>16 <cis a'>8 |
+	<b d b'>8. a'16 <b, d g>8 <a d a'>4 <a d>8 |
+	<b d b'>8. a'16 <b, e g>8 <a cis a'>8 <a fis'> <fis d'> |
+	<b g'>8. fis'16 <b, d>8 << { e4. } \\ { <a, d>8 cis a } >> |
+	<a e' a>8. <d fis>16 <a e' a>8 <a cis a'> <d fis> <cis a'>8 |
+	<d g b d>8. <cis cis'>16 <b b'>8 << { <a a'>4 <a a'>8 } \\ { e'8 d cis } >> |
+	<d g b d>8. <a' cis>16 <g b>8 <a, e' a>8 <d fis> <a d> |
+	<< { a'4. ~ a4 } \\ { <b, d>4. <a cis>4 } >> <a e'>8^\pp |
+
 	% 2nd theme revoiced
-	<< { a4. ~ a4 } \\ { b,4. cis4 } >> <a e'>8^\pp |
 	<fis d'>8 <a fis'> <d a'> <a d> <a fis'> <d a'> |
 	<g, d'>8 <b g'> <g' b> <d a'> <b g'> <g b> |
 	<a cis>8 <a e'> <cis a'> <cis g'> <a fis'> <a e'>8 |
 	<a fis'>8 <fis d'> <g d'> <fis d'> <a fis'> <g e'> |
 	<fis d'>8 <a fis'> <d a'> <a d> <a fis'> <d a'> |
-	<< { a'8[ g] } \\ { <b, d>4 } >> <b d fis>8 <b d e>-- <b d fis>-- <b d e g>-- |
+	<< { a'8[ g] } \\ { <d b'>4 } >> <b fis'>8 <b d e>-- <b d fis>-- <b d e g>-- |
 	<d a'>8 <a d> <d a'> <cis a'> <g cis> <g e'> |
 	<fis d'>8 a fis a d fis |
 
@@ -286,10 +296,19 @@ CodaL_alt = \relative c {
 
 	\once \override Staff.PianoPedalBracket.edge-height = #'(0.0 . 1.0)  % suppress starting pedal lift because this is a coda
 	\partial 8 s8\SD |
+	a\SU\SD a' b cis d e |
+	% Chorus
+	d,\SU\SD a' fis' fis,\SU\SD a fis' |
+	g,\SU\SD b d fis,\SU\SD a d |
+	g,\SU\SD b d fis,\SU\SD a b |
+	e,\SU\SD g b a,\SU\SD g' cis |
+	d,\SU\SD a' fis' fis,\SU\SD a fis' |
+	g,\SU\SD b d fis,\SU\SD a fis' |
+	g,\SU\SD b d fis,\SU\SD a b |
+	e,\SU\SD g d' a,[\SU\SD g'] a\mf |
 	% 2nd theme revoiced
-	e\SU\SD g d' a,[\SU\SD g'] a\mf |
 	a\SU\SD d fis fis8. e16 d8 | b8.\SU\SD cis16 d8 b8\SU\SD cis d |
-	g,\SU\SD cis e e8. d16 cis8 | d8.\SU\SD cis16 b8 a4\SU\SD a8 |
+	g,\SU\SD cis e e8. d16\SU cis8 | d8.\SD cis16 b8 a4\SU\SD a8 |
 	a\SU\SD d fis fis8. e16 fis8 | g8.\SU\SD fis16 d8 g8-- fis-- d-- |
 	e\SU\SD fis e e8.\SU\SD d16 cis8 | d4\SU\SD a8 fis a d |
 
@@ -304,7 +323,10 @@ CodaL_alt = \relative c {
 
 coda_dynamics_alt = {
 	\partial 8 s8 |
-	s4.\> s4 s8\! |
+	s2.\< |
+	% Chorus
+	s2.\f s s s
+	s s s s4.\> s4 s8\! |
 	% 2nd theme revoiced
 	s2. s s s
 	s s s s8 s4\p s4.
