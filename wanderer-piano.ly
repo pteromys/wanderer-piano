@@ -5,7 +5,7 @@
 %                                  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\version "2.20.0"
+\version "2.22.0"
 
 #(use-modules (guile-user))  % required to see -e definitions but generates a warning: http://lilypond.1069038.n5.nabble.com/loglevel-ERROR-still-emits-Warning-message-td73314.html
 % Set default key. It'd be enough here to do (define-public destkey #{ cis #}) but somehow -e doesn't like that
@@ -29,10 +29,10 @@ PianoR = \relative c' {
 	r4. r4 a'8\( |   % 5
 
 	% Opening theme
-	\mark \markup { \musicglyph #"scripts.segno" }
+	\mark \markup { \musicglyph "scripts.segno" }
 	\once \override Score.FootnoteItem.annotation-line = ##f
 	\once \override Score.FootnoteSpanner.baseline-skip = #3.0
-	a-\footnote "*" #'(0 . 3) "* Articulate at least one staccato by keeping the pedal lifted and holding the left hand notes by hand." -.
+	a-\footnote "*" #'(0 . -4.5) "* Articulate at least one staccato by keeping the pedal lifted and holding the left hand notes by hand." -.
 	d-. fis-. a4 fis8 | g8. fis16 e8 c4 e8 |   % 7
 	g8. fis16 e8 c4 e8 | c-. d4 ~ d\) a8 |   % 9
 	a-.^\markup \italic simile d-. fis-. a4 fis8 | g8. fis16 e8 c4 e8 |   % 11
@@ -53,7 +53,7 @@ PianoR = \relative c' {
 	g, cis e e8. d16 cis8 | d8. cis16 b8 a4 a8 |   % 33
 	a d fis fis8. e16 fis8 | g8. fis16 d8 g8. fis16 d8 |   % 35
 	e fis e e8. d16 cis8 |   % 36
-	\mark \markup { \musicglyph #"scripts.coda" }
+	\mark \markup { \musicglyph "scripts.coda" }
 	d4. cis4-- fis,8\( |   % 37
 
 	% Development 1
@@ -80,7 +80,7 @@ PianoR = \relative c' {
 	\once \override Score.RehearsalMark.self-alignment-X = #RIGHT
 	\mark \markup {
 	  \general-align #Y #CENTER { D.S. al }
-	  \general-align #Y #CENTER \musicglyph #"scripts.coda"
+	  \general-align #Y #CENTER \musicglyph "scripts.coda"
 	}
 	\bar "||"
 }
@@ -95,9 +95,9 @@ CodaR = \relative c {
 	\time 6/8
 
 	\set Score.currentBarNumber = #69
-	\once \override Score.RehearsalMark.extra-offset = #'( -5.5 . 0 )  % Hack to align coda symbol with clef, from http://lilypond.org/doc/v2.18/Documentation/snippets/repeats#positioning-segno-and-coda-with-line-break.ly
+	\once \override Score.RehearsalMark.extra-offset = #'( -11.0 . 1.0 )  % Hack to align coda symbol with clef, from http://lilypond.org/doc/v2.18/Documentation/snippets/repeats#positioning-segno-and-coda-with-line-break.ly
 	\mark \markup {
-	  \general-align #Y #CENTER \musicglyph #"scripts.coda"
+	  \general-align #Y #CENTER \musicglyph "scripts.coda"
 	  \general-align #Y #CENTER { CODA }
 	}
 
@@ -248,7 +248,7 @@ CodaR_alt = \relative c {
 	\time 6/8
 
 	\set Score.currentBarNumber = #78
-	\once \override Score.RehearsalMark.extra-offset = #'( 15.0 . 0.0 )  % shift text right to start at clef
+	\once \override Score.RehearsalMark.extra-offset = #'( -11.0 . 0.0 )  % shift text left to start at clef
 	\mark \markup {
 	  alternative Coda starting at measure 20
 	}
