@@ -9,7 +9,7 @@
 
 #(use-modules (guile-user))  % required to see -e definitions but generates a warning: http://lilypond.1069038.n5.nabble.com/loglevel-ERROR-still-emits-Warning-message-td73314.html
 % Set default key. It'd be enough here to do (define-public destkey #{ cis #}) but somehow -e doesn't like that
-#(if (not (defined? 'indestkey)) (define-public indestkey (define-music-function (parser location music) (ly:music?) #{ \transpose d cis $music #})))
+#(if (not (defined? 'indestkey)) (ly:parser-define! indestkey (define-music-function (parser location music) (ly:music?) #{ \transpose d cis $music #})))
 
 #(set-default-paper-size "letter")
 #(ly:set-option 'point-and-click #f)
